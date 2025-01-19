@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  laravel:
+    build:
+      context: ./laravel
+      dockerfile: Dockerfile
+    container_name: laravel
+    working_dir: /app
+    volumes:
+      - ./laravel/laravel-container:/app
+    ports:
+      - "8000:8000"
+    command: bash -c "[[ ! -f artisan ]] && composer create-project laravel/laravel . || php artisan serve --host=0.0.0.0"
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:latest
+    container_name: practica_ud3_mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: ud3_bruno     
+      MARIADB_DATABASE: practica_ud3       
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+volumes:
+  mariadb_data:
