@@ -132,7 +132,6 @@ Accede al contenedor de Laravel para instalar las dependencias necesarias del pr
 
 ```bash
 docker exec -it laravel bash
-composer install
 ```
 
 ### 5. :package: Migrar y poblar la base de datos
