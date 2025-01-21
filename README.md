@@ -93,8 +93,8 @@ El archivo `api.php` contiene las rutas necesarias para interactuar con la **API
 Clona el repositorio desde GitHub y accede a la carpeta del proyecto:
 
 ```bash
-git clone https://github.com/brunoruizlafuente/prac_UD3.git
-cd prac_UD3
+git clone https://github.com/brunoruizlafuente/practica_UD3
+cd practica_UD3
 ```
 
 ### 2. :whale: Levantar los contenedores mediante Docker Compose
