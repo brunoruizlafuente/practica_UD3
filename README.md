@@ -93,8 +93,8 @@ El archivo `api.php` contiene las rutas necesarias para interactuar con la **API
 Clona el repositorio desde GitHub y accede a la carpeta del proyecto:
 
 ```bash
-git clone https://github.com/brunoruizlafuente/practica_UD3.git
-cd practica_UD3
+git clone https://github.com/brunoruizlafuente/prac_UD3.git
+cd prac_UD3
 ```
 
 ### 2. :whale: Levantar los contenedores mediante Docker Compose
@@ -126,15 +126,35 @@ DB_USERNAME=root
 DB_PASSWORD=ud3_bruno
 ```
 
-### 4. Instalar dependencias
+Si no existe el archivo .env, crea uno basado en el ejemplo incluido en el proyecto:
+```bash
+cp .env.example .env
+```
 
-Accede al contenedor de Laravel para instalar las dependencias necesarias del proyecto:
+### 4. :key: Generar la clave de la aplicación
+
+Dentro del contenedor de Laravel, genera la clave de la aplicación. Esto es necesario para que Laravel funcione correctamente.
+1. Accede al contenedor de Laravel:
 
 ```bash
 docker exec -it laravel bash
 ```
+2. Genera la clave:
 
-### 5. :package: Migrar y poblar la base de datos
+```bash
+php artisan key:generate
+```
+Esto añadirá la clave en el archivo .env en la variable APP_KEY.
+
+### 5. Instalar dependencias
+
+Instala las dependencias necesarias del proyecto:
+
+```bash
+composer install
+```
+
+### 6. :package: Migrar y poblar la base de datos
 
 Dentro del contenedor de Laravel, ejecuta las migraciones y los seeders para crear las tablas y configurar la base de datos:
 
@@ -143,7 +163,7 @@ php artisan migrate
 php artisan db:seed
 ```
 
-### 6. :file_cabinet: Acceso directo a la base de datos MariaDB (opcional)
+### 7. :file_cabinet: Acceso directo a la base de datos MariaDB (opcional)
 
 Si necesitas acceder directamente al contenedor de MariaDB para ejecutar consultas SQL, puedes usar el siguiente comando:
 
