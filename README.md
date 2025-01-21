@@ -97,23 +97,7 @@ git clone https://github.com/brunoruizlafuente/practica_UD3
 cd practica_UD3
 ```
 
-### 2. :whale: Levantar los contenedores mediante Docker Compose
-
-Levanta los contenedores según la configuración en `docker-compose.yml`:
-
-```bash
-docker-compose up -d
-```
-
-Verifica que los contenedores estén funcionando correctamente.
-
-```bash
-docker ps
-```
-Deberías ver dos contenedores en ejecución.
-
-
-### 3. Configurar el archivo `.env`
+### 2. Configurar el archivo `.env`
 
 Asegúrate de que el archivo `.env` tenga las siguientes variables para conectar Laravel con la base de datos MariaDB:
 
@@ -131,39 +115,33 @@ Si no existe el archivo .env, crea uno basado en el ejemplo incluido en el proye
 cp .env.example .env
 ```
 
-### 4. :key: Generar la clave de la aplicación
+### 3. :whale: Levantar los contenedores mediante Docker Compose
 
-Dentro del contenedor de Laravel, genera la clave de la aplicación. Esto es necesario para que Laravel funcione correctamente.
-1. Accede al contenedor de Laravel:
-
-```bash
-docker exec -it laravel bash
-```
-2. Genera la clave:
+Levanta los contenedores según la configuración en `docker-compose.yml`:
 
 ```bash
-php artisan key:generate
+docker-compose up --build -d
 ```
-Esto añadirá la clave en el archivo .env en la variable APP_KEY.
 
-### 5. Instalar dependencias
-
-Instala las dependencias necesarias del proyecto:
+Verifica que los contenedores estén funcionando correctamente.
 
 ```bash
-composer install
+docker ps
 ```
+Deberías ver dos contenedores en ejecución.
 
-### 6. :package: Migrar y poblar la base de datos
+
+### 4. :package: Migrar y poblar la base de datos
 
 Dentro del contenedor de Laravel, ejecuta las migraciones y los seeders para crear las tablas y configurar la base de datos:
 
 ```bash
+docker exec -it laravel bash
 php artisan migrate
 php artisan db:seed
 ```
 
-### 7. :file_cabinet: Acceso directo a la base de datos MariaDB (opcional)
+### 5. :file_cabinet: Acceso directo a la base de datos MariaDB (opcional)
 
 Si necesitas acceder directamente al contenedor de MariaDB para ejecutar consultas SQL, puedes usar el siguiente comando:
 
@@ -182,6 +160,15 @@ Ejecuta comandos como:
 SHOW DATABASES;
 USE practica_ud3;
 SHOW TABLES;
+```
+
+#### 6. :books: Nota opcional sobre dependencias (Composer)
+
+En la mayoría de los casos, no será necesario ejecutar `composer install` porque las dependencias ya están incluidas en el proyecto. Sin embargo, si experimentas errores relacionados con ellas, accede al contenedor de Laravel y ejecuta:
+
+```bash
+docker exec -it laravel bash
+composer install
 ```
 
 ---
