@@ -21,6 +21,9 @@ RUN composer global require laravel/installer
 # Añadir Laravel Installer al PATH
 RUN echo "export PATH=/root/.composer/vendor/bin:$PATH" >> /root/.bashrc
 
+# Ajustar permisos para storage y bootstrap/cache
+RUN chmod -R 777 /app/storage /app/bootstrap/cache || true
+
 # Exponer el puerto para Laravel
 EXPOSE 8000
 
